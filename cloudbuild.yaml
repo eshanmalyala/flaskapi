@@ -16,3 +16,5 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/flask-cloudbuild-app'
+
+logsBucket: 'gs://mybucket579'
