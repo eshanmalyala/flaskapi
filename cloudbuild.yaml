@@ -1,4 +1,12 @@
 steps:
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args: 
+      - '-c' 
+      - |
+         echo "Listing files under /workspace/falskapi:"
+         ls -R /workspace/flaskapi || echo "Directory not found"
+      
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'flaskapi/Dockerfile', '-t', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app', '.']
 
