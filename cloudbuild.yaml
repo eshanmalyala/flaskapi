@@ -36,5 +36,4 @@ steps:
 # images:
 #   - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app'
 
-
-# logsBucket: 'gs://mybucket579'
+logsBucket: 'gs://mybucket579'
