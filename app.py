@@ -1,5 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
-@app.route('/')
-def hello():
-    retrun 'Hello  from Flask on cloud build'
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
+if __name__ == "__main__":
+    app.run(debug=True)  # debug=True enables debug mode for development
