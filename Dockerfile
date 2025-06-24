@@ -1,18 +1,21 @@
-# FROM python:3.11-alpine
-# WORKDIR /app
-# RUN apk add --no-cache gcc musl-dev libffi-dev
-# COPY requirements.txt .
-# RUN pip install --no-cache-dir -r requirements.txt
-# COPY ..
-# ENV  PORT=8080
-# CMD ["python", "app.py"]
-# FROM alpine  
-# CMD ["echo", "Hello World!!"]
-
+# Use official Python base image
 FROM python:3.11-alpine
+
+# Set working directory
 WORKDIR /app
-COPY requirements.txt .
+
+# Copy requirements and install them
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ..
+
+# Copy all other source files
+COPY . .
+
+# Set environment variable
 ENV PORT=8080
+
+# Expose port (optional for local testing)
+EXPOSE 8080
+
+# Run the app
 CMD ["python", "app.py"]
