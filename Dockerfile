@@ -6,5 +6,13 @@
 # COPY ..
 # ENV  PORT=8080
 # CMD ["python", "app.py"]
-FROM alpine  
-CMD ["echo", "Hello World!!"]
+# FROM alpine  
+# CMD ["echo", "Hello World!!"]
+
+FROM python:3.11-alpine
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY ..
+ENV PORT=8080
+CMD ["python", "app.py"]
