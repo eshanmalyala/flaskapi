@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-cloudbuild-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-cloudbuild-app
+  template:
+    metadata:
+      labels:
+        app: flask-cloudbuild-app
+    spec:
+      containers:
+        - name: flask-container
+          image: us-central1-docker.pkg.dev/YOUR_PROJECT/gae-standard/flask-cloudbuild-app:IMAGE_TAG
+          ports:
+            - containerPort: 8080
