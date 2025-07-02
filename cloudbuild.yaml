@@ -22,7 +22,14 @@ steps:
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
-
+   - name: 'gcr.io/cloud-builders/gcloud'
+     args:
+      - 'container'
+      - 'clusters'
+      - 'get-credentials'
+      - 'cluster-1'
+      - 'region=region'
+      - '--project=$PROJECT_ID'
   - name: 'gcr.io/cloud-builders/kubectl'
     entrypoint: 'bash'
     args:
