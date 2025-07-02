@@ -19,8 +19,6 @@ steps:
       '--platform', 'managed',
       '--allow-unauthenticated'
     ]
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--quiet']
     
 images:
   - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app'
