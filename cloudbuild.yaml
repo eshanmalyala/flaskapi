@@ -18,7 +18,7 @@ steps:
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated'
-    ]
+      ]
     - name: 'gcr.io/cloud-builder/gke-deployment'
       args: [
         - 'apply'
@@ -32,7 +32,7 @@ steps:
         # -  --location=asia-south2
         # -  --cluster=cluster-1
         # - --namespace=default
-      ]
+        ]
     
 images:
   - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app'
