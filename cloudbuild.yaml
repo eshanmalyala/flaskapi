@@ -7,18 +7,32 @@ steps:
       echo "Listing contents of /workspace:"
       ls -la /workspace  
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build','-t', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app', '.']
+    args: ['build','-t', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA', '.']
     
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app']     
+    args: ['push', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA']     
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [
       'run', 'deploy', 'flask-cloudbuild-app',
-      '--image', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app',
+      '--image', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA',
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated'
     ]
+    - name: 'gcr.io/cloud-builder/gke-deployment'
+      args: [
+        - 'apply'
+        - '-f'
+        - 'k8s/deployment.yaml'
+      env: 
+        - 'IMAGE_TAG=$COMMIT_SHA'
+        # - run
+        # - --filename=k8s/deployment.yaml
+        # - --image=us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app
+        # -  --location=asia-south2
+        # -  --cluster=cluster-1
+        # - --namespace=default
+      ]
     
 images:
   - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app'
