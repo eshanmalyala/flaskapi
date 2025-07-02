@@ -11,20 +11,20 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
+      - 'us-central1-docker.pkg.dev/sharedproject-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
       - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
       - 'deploy'
       - 'flask-cloudbuild-app'
-      - '--image=us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
+      - '--image=us-central1-docker.pkg.dev/$PROJECT_ID/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
@@ -47,6 +47,6 @@ steps:
         kubectl apply -f k8s/deployment-final.yaml
 
 images:
-  - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
 
 logsBucket: 'gs://mybucket579'
