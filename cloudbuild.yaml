@@ -8,10 +8,16 @@ steps:
         ls -la /workspace
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA', '.']
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
+      - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA']
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -22,14 +28,16 @@ steps:
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
-   - name: 'gcr.io/cloud-builders/gcloud'
-     args:
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
       - 'container'
       - 'clusters'
       - 'get-credentials'
       - 'cluster-1'
-      - 'region=region'
+      - '--region=asia-south2'
       - '--project=$PROJECT_ID'
+
   - name: 'gcr.io/cloud-builders/kubectl'
     entrypoint: 'bash'
     args:
