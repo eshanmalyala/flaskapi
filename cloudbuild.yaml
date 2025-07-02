@@ -12,13 +12,12 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA']     
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
+    args: 
       'run', 'deploy', 'flask-cloudbuild-app',
       '--image', 'us-central1-docker.pkg.dev/sharedproejcet-1/gae-standard/flask-cloudbuild-app:$COMMIT_SHA',
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated'
-      ]
     - name: 'gcr.io/cloud-builder/gke-deployment'
       args: [
         - 'apply'
